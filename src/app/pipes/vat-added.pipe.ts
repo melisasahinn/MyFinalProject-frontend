@@ -1,12 +1,11 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'vatAdded'
+  name: 'vatAdded',
 })
 export class VatAddedPipe implements PipeTransform {
-
-  transform(value: number, rate:number): number {
-    return value+(value*rate/100);//kdv hesaplama
+  public transform(value: number, rate: number): number {
+    const calculateKdv = value + (value * rate) / 100;
+    return calculateKdv;
   }
-
 }

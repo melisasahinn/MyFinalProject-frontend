@@ -5,32 +5,30 @@ import { ListResponseModel } from '../models/listResponseModel';
 import { Product } from '../models/product';
 import { ResponseModel } from '../models/responseModel';
 
-
-
-
-
-@Injectable({ //enjekte edilecek servis
-  providedIn: 'root'
+@Injectable({
+  providedIn: 'root',
 })
 export class ProductService {
-  apiUrl="https://localhost:44318/api/";
-  constructor(private httpClient:HttpClient) { }
-  
-  getProducts():Observable<ListResponseModel<Product>> {
-    let newPath = this.apiUrl + "products/getall"
-    return this.httpClient.get<ListResponseModel<Product>>(newPath);
-    
-  }
+  apiUrl = 'https://localhost:44318/api/';
+  constructor(private httpClient: HttpClient) {}
 
-  getProductsByCategory(categoryId:number):Observable<ListResponseModel<Product>> {
-    let newPath = this.apiUrl + "products/getbycategory?categoryId="+categoryId
+  public getProducts(): Observable<ListResponseModel<Product>> {
+    let newPath = this.apiUrl + 'products/getall';
     return this.httpClient.get<ListResponseModel<Product>>(newPath);
   }
 
-  add(product:Product):Observable<ResponseModel>{
-    return this.httpClient.post<ResponseModel>(this.apiUrl+"products/add",product)
-    
-
+  public getProductsByCategory(
+    categoryId: number
+  ): Observable<ListResponseModel<Product>> {
+    let newPath =
+      this.apiUrl + 'products/getbycategory?categoryId=' + categoryId;
+    return this.httpClient.get<ListResponseModel<Product>>(newPath);
   }
 
+  public add(product: Product): Observable<ResponseModel> {
+    return this.httpClient.post<ResponseModel>(
+      this.apiUrl + 'products/add',
+      product
+    );
+  }
 }
